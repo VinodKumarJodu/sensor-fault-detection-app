@@ -7,8 +7,8 @@ PIPELINE_NAME = "sensor"
 ARTIFACT_DIR = "artifact"
 FILE_NAME = "sensor.csv"
 
-TRAINING_FILE_NAME = "train.csv"
-TESTING_FILE_NAME = "test.csv"
+TRAIN_FILE_NAME = "train.csv"
+TEST_FILE_NAME = "test.csv"
 
 PREPROCESSING_OBJECT_FILE_NAME = "preprocessing.pkl"
 MODEL_FILE_NAME = "model.pkl"
@@ -22,3 +22,11 @@ DATA_INGESTION_FEATURE_STORE_DIR: str = "feature_store"
 DATA_INGESTION_INGESTED_DIR: str = "ingested"
 DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO: float = 0.2
 
+"""
+Defining Data Validation Related Constants & starts with DATA_VALIDATION Variable Name
+"""
+DATA_VALIDATION_DIR_NAME: str = "data_validation"
+DATA_VALIDATION_VALID_DIR: str = "valid_data"
+DATA_VALIDATION_INVALID_DIR: str = "invalid_data"
+DATA_VALIDATION_DRIFT_REPORT_DIR: str = "drift_report"
+DATA_VALIDATION_DRIFT_REPORT_FILE_NAME: str = "report.yaml"
