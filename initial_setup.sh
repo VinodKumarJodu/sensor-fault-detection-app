@@ -1,3 +1,5 @@
+echo [$(date)]: "Upgrading Pip"
+pip3 install --upgrade pip setuptools==60.10.0
 echo [$(date)]: "Configuring Github with VS Code :: START"
 git config --global user.name "VinodKumarJodu"
 git config --global user.email "vinodkumarjodu@gmail.com"
