@@ -1,16 +1,16 @@
 import os, sys
 import pandas as pd 
-from distutis import dir_utils
+# from distutis import dir_utils
 from scipy.stats import ks_2samp
 from sensor.logger import logging
 from sensor.exceptions import SensorException
 from sensor.constants.training_pipeline_constants import  SCHEMA_FILE_PATH
 from sensor.entity.config_entity import DataIngestionConfig, DataValidationConfig
-from sensor.entity.artifact_entity import DataValidationArtifact
+from sensor.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
 from sensor.utils.main_utils import read_yaml_file, write_yaml_file
 
 
-def DataValidation:
+class DataValidation:
     def __init__(self, data_ingestion_artifact: DataIngestionArtifact, data_validation_config: DataValidationConfig):
         try:
             self.data_ingestion_artifact = data_ingestion_artifact
