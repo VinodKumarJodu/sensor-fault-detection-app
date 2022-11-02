@@ -21,15 +21,11 @@ class SensorData:
 
     def export_collection_as_dataframe(self, collection_name: str, database_name: Optional[str]=None) -> pd.DataFrame:
         try:
-            """
-            Exports Entire Collection as DataFrame
-            returns pd.DataFrame of collection
-            """
             if database_name is None:
                 collection = self.mongo_client.database[collection_name]
             else:
                 collection = self.mongo_client[database_name][collection_name]
-            df = pd.Dataframe(list(collection.find()))
+            df = pd.DataFrame(list(collection.find()))
 
             if "_id" in df.columns.to_list():
                 df = df.drop(columns=["_id"], axis=1)

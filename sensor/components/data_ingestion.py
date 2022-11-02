@@ -29,7 +29,7 @@ class DataIngestion:
             #creating folder
             dir_path = os.path.dirname(feature_store_file_path)
             os.makedirs(dir_path, exist_ok=True)
-            dataframe.to_csv(DataFrame, index=False, header=True)
+            dataframe.to_csv(feature_store_file_path, index=False, header=True)
             return dataframe
         except Exception as e:
             raise SensorException(e, sys)
@@ -40,7 +40,7 @@ class DataIngestion:
             train_set, test_set = train_test_split(dataframe, test_size=self.data_ingestion_config.train_test_split_ratio)
             logging.info("Completed train test split :: END")
 
-            dir_path = os.path.dirname(self.data_ingestion_config.training_file_path)
+            dir_path = os.path.dirname(self.data_ingestion_config.train_file_path)
             os.makedirs(dir_path, exist_ok=True)
             train_set.to_csv(self.data_ingestion_config.train_file_path, index=False, header=True)
 

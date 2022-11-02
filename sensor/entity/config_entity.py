@@ -1,7 +1,7 @@
 from datetime import datetime
 import os
 # Importing training pipeline related constants
-from sensor.constants.training_pipeline_constants import PIPELINE_NAME, ARTIFACT_DIR
+from sensor.constants.training_pipeline_constants import PIPELINE_NAME, ARTIFACT_DIR, FILE_NAME, TRAINING_FILE_NAME, TESTING_FILE_NAME
 # Importing Data Ingestion related constants
 from sensor.constants.training_pipeline_constants import DATA_INGESTION_COLLECTION_NAME, DATA_INGESTION_DIR_NAME, DATA_INGESTION_FEATURE_STORE_DIR, DATA_INGESTION_INGESTED_DIR, DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO
 class TrainingPipelineConfig:
@@ -18,5 +18,5 @@ class DataIngestionConfig:
         self.feature_store_file_path: str = os.path.join(self.data_ingestion_dir,DATA_INGESTION_FEATURE_STORE_DIR,FILE_NAME)
         self.train_file_path: str = os.path.join(self.data_ingestion_dir,DATA_INGESTION_INGESTED_DIR, TRAINING_FILE_NAME)
         self.test_fie_path: str = os.path.join(self.data_ingestion_dir,DATA_INGESTION_INGESTED_DIR, TESTING_FILE_NAME)
-        self.train_test_split_ration: float = DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO
+        self.train_test_split_ratio: float = DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO
         self.collection_name: str = DATA_INGESTION_COLLECTION_NAME
