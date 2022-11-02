@@ -1,3 +1,10 @@
-from sensor.components.data_ingestion import DataIngestionPipeline
+import os, sys
+from sensor.logger import logging
+from sensor.exceptions import SensorException
+from sensor.pipeline.training_pipeline import TrainPipeline
 
-print(data_ingestion_config.collection_name)
+if __name__ == "__main__":
+    try:
+        pass
+    except Exception as e:
+        logging.exception(e) 
