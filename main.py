@@ -1,3 +1,3 @@
-from sensor.logger import LOG_FILE, LOG_FILE_PATH
-print(LOG_FILE)
-print(LOG_FILE_PATH)
+from sensor.components.data_ingestion import DataIngestionPipeline
+
+print(data_ingestion_config.collection_name)

@@ -6,7 +6,7 @@ import pandas as pd
 
 from sensor.configurations.mongo_db_connection import MongoDBClient
 from sensor.constants.database import DATABASE_NAME
-from sensor.exception import SensorException
+from sensor.exceptions import SensorException
 from sensor.logger import logging
 
 class SensorData:
@@ -19,12 +19,12 @@ class SensorData:
         except Exception as e:
             raise SensorException(e, sys)
 
-    def export_collection_as_dataframe(self, collection_name: str, database_name: Optional[str]=None) -> pd.Dataframe:
+    def export_collection_as_dataframe(self, collection_name: str, database_name: Optional[str]=None) -> pd.DataFrame:
+        try:
             """
             Exports Entire Collection as DataFrame
             returns pd.DataFrame of collection
             """
-        try:
             if database_name is None:
                 collection = self.mongo_client.database[collection_name]
             else:

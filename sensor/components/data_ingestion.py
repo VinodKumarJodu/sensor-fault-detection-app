@@ -1,6 +1,6 @@
 import os, sys
 from sensor.logger import logging
-from sensor.exception import SensorException
+from sensor.exceptions import SensorException
 from sensor.data_access.sensor_data import SensorData
 from sensor.entity.config_entity import DataIngestionConfig
 from sensor.entity.artifact_entity import DataIngestionArtifact
