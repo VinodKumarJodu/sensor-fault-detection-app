@@ -21,6 +21,6 @@ setup(
     version="0.0.1",
     author="VinodKumarJodu",
     author_email="vinodkumarjodu@gmail.com",
-    find_packages=find_packages(),
-    install_requires=get_requirements(),
+    find_packages=find_packages(include=["config","sensor"]),
+    install_requires=get_requirements()
 )
