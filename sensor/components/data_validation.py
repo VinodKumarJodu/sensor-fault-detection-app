@@ -5,7 +5,7 @@ from scipy.stats import ks_2samp
 from sensor.logger import logging
 from sensor.exceptions import SensorException
 from sensor.constants.training_pipeline_constants import  SCHEMA_FILE_PATH
-from sensor.entity.config_entity import DataIngestionConfig, DataValidationConfig
+from sensor.entity.config_entity import TrainingPipelineConfig,DataIngestionConfig, DataValidationConfig
 from sensor.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
 from sensor.utils.main_utils import read_yaml_file, write_yaml_file
 
@@ -23,7 +23,7 @@ class DataValidation:
         try:
             zero_std_cols = []
             for column in dataframe.columns:
-                if column.std() == 0:
+                if dataframe[column].std() == 0:
                     zero_std_cols.append(column)
             dataframe = dataframe.drop(zero_std_cols, axis=1)
             return dataframe 
@@ -43,7 +43,7 @@ class DataValidation:
 
     def is_numerical_columns_exist(self, dataframe:pd.DataFrame)->bool:
         try:
-            numerical_columns = self._schema_config["numerica_columns"]
+            numerical_columns = self._schema_config["numerical_columns"]
             dataframe_columns = dataframe.columns
             numerical_column_present = True
             missing_numerical_columns = []
@@ -63,13 +63,13 @@ class DataValidation:
         except Exception as e:
             raise SensorException(e, sys)
 
-    def detect_dataset_drift(self, base_df:pd.DataFrame, current_df:pd.DataFrame, thresold:float=0.05)-> bool:
+    def detect_dataset_drift(self, base_df, current_df, threshold:float=0.05)-> bool:
         try:
             dataset_drift_status: bool = False
             report = {}
             for column in base_df.columns:
                 d1 = base_df[column]
-                d2 = current_df[columns]
+                d2 = current_df[column]
                 is_same_dist = ks_2samp(d1,d2)
                 if threshold <= is_same_dist.pvalue:
                     drift_found = False
@@ -127,7 +127,7 @@ class DataValidation:
             data_validation_artifact = DataValidationArtifact(
                 validation_status = status,
                 valid_train_file_path = self.data_ingestion_artifact.train_file_path,
-                valid_test_file_path = self.data_ingestion_artifact.test_fie_path,
+                valid_test_file_path = self.data_ingestion_artifact.test_file_path,
                 invalid_train_file_path = None,
                 invalid_test_file_path = None,
                 drift_report_file_path = self.data_validation_config.drift_report_file_path
