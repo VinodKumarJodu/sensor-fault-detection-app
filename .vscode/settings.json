@@ -1,0 +1,5 @@
+{
+    "workbench.experimental.editSessions.autoStore": "onShutdown",
+    "workbench.experimental.editSessions.enabled": false,
+    "git.autofetch": true
+}
