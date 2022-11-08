@@ -25,7 +25,7 @@ def write_yaml_file(file_path: str, content: object, replace: bool=False) -> Non
         raise SensorException(e, sys)
 
 
-def save_numpy_array_data(file_path:str)-> np.array:
+def save_numpy_array_data(file_path:str, array:np.array)-> np.array:
     """
     Loads numpy array data from file
     file_path: str -> location of file to load
