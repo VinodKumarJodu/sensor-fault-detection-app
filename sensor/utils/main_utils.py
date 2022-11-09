@@ -27,13 +27,15 @@ def write_yaml_file(file_path: str, content: object, replace: bool=False) -> Non
 
 def save_numpy_array_data(file_path:str, array:np.array)-> np.array:
     """
-    Loads numpy array data from file
+    save numpy array data to file
     file_path: str -> location of file to load
     return: np.array 
     """
     try:
-        with open(file_path,"rb") as file_obj:
-            return np.load(file_obj) 
+        dir_path = os.path.dirname(file_path)
+        os.makedirs(dir_path, exist_ok=True)
+        with open(file_path,"wb") as file_obj:
+            np.save(file_obj, array)
     except Exception as e:
         raise SensorException(e,sys)
 

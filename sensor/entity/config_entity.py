@@ -9,6 +9,8 @@ from sensor.constants.training_pipeline_constants import DATA_INGESTION_COLLECTI
 from sensor.constants.training_pipeline_constants import DATA_VALIDATION_DIR_NAME, DATA_VALIDATION_VALID_DIR, DATA_VALIDATION_INVALID_DIR, DATA_VALIDATION_DRIFT_REPORT_DIR, DATA_VALIDATION_DRIFT_REPORT_FILE_NAME
 # Importing Data Transformation Related Constants
 from sensor.constants.training_pipeline_constants import DATA_TRANSFORMATION_DIR_NAME, DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR_NAME, DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR, PREPROCESSING_OBJECT_FILE_NAME
+# Importing Model trainer Constants
+from sensor.constants.training_pipeline_constants import MODEL_TRAINER_DIR_NAME, MODEL_TRAINER_TRAINED_MODEL_DIR,MODEL_TRAINER_TRAINED_MODEL_NAME, MODEL_TRAINER_EXPECTED_SCORE, MODEL_TRAINER_OVER_FITTING_UNDER_FITTING_THRESHOLD
 
 class TrainingPipelineConfig:
     def __init__(self, timestamp=datetime.now()):
@@ -45,3 +47,10 @@ class DataTransformationConfig:
         self.transformed_train_file_path: str = os.path.join(self.data_transformation_dir, DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR_NAME, TRAIN_FILE_NAME.replace("csv","npy"))
         self.transformed_test_file_path: str = os.path.join(self.data_transformation_dir, DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR_NAME, TEST_FILE_NAME.replace("csv", "npy"))
         self.transformed_object_file_path: str = os.path.join(self.data_transformation_dir,DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR, PREPROCESSING_OBJECT_FILE_NAME)
+
+class ModelTrainerConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.model_trainer_dir: str = os.path.join(training_pipeline_config.artifact_dir, MODEL_TRAINER_DIR_NAME)
+        self.trained_model_file_path: str = os.path.join(self.model_trainer_dir, MODEL_TRAINER_TRAINED_MODEL_DIR,MODEL_FILE_NAME)
+        self.expected_accuracy: float = MODEL_TRAINER_EXPECTED_SCORE
+        self.overfitting_underfitting_threshold: float = MODEL_TRAINER_OVER_FITTING_UNDER_FITTING_THRESHOLD
