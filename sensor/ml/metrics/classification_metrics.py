@@ -1,6 +1,7 @@
 import os, sys
 from sensor.logger import logging
 from sensor.exceptions import SensorException
+from sensor.entity.artifact_entity import ClassificationMetricArtifact
 
 from sklearn.metrics import f1_score, precision_score, recall_score
 

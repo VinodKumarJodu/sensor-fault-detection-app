@@ -2,7 +2,7 @@ from datetime import datetime
 import os
 from dataclasses import dataclass
 # Importing training pipeline related constants
-from sensor.constants.training_pipeline_constants import PIPELINE_NAME, ARTIFACT_DIR, FILE_NAME, TRAIN_FILE_NAME, TEST_FILE_NAME
+from sensor.constants.training_pipeline_constants import PIPELINE_NAME, ARTIFACT_DIR, FILE_NAME, TRAIN_FILE_NAME, TEST_FILE_NAME, MODEL_FILE_NAME
 # Importing Data Ingestion related constants
 from sensor.constants.training_pipeline_constants import DATA_INGESTION_COLLECTION_NAME, DATA_INGESTION_DIR_NAME, DATA_INGESTION_FEATURE_STORE_DIR, DATA_INGESTION_INGESTED_DIR, DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO
 # Importing Data Validation Related Constants

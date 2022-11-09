@@ -45,7 +45,7 @@ class TrainPipeline:
         except Exception as e:
             raise SensorException(e, sys)
 
-    def start_model_training(self, data_transformation_artifact:DatatransformationArtifact):
+    def start_model_training(self, data_transformation_artifact:DataTransformationArtifact):
         try:
             model_trainer_config = ModelTrainerConfig(training_pipeline_config=self.training_pipeline_config) 
             model_trainer = ModelTrainer(model_trainer_config, data_transformation_artifact)

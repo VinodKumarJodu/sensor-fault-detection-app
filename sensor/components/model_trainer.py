@@ -4,7 +4,7 @@ from sensor.exceptions import SensorException
 from sensor.entity.config_entity import ModelTrainerConfig
 from sensor.entity.artifact_entity import DataTransformationArtifact,ModelTrainerArtifact
 from sensor.utils.main_utils import load_numpy_array_data
-from sensor.ml.metrics.classifiaction_metrics import get_classification_score
+from sensor.ml.metrics.classification_metrics import get_classification_score
 from sensor.ml.model.estimator import SensorModel
 from sensor.utils.main_utils import save_object, load_object
 from xgboost import XGBClassifier
@@ -35,7 +35,7 @@ class ModelTrainer:
 
             X_train,y_train, X_test, y_test = (train_arr[:,:-1], train_arr[:,-1], test_arr[:,:-1], test_arr[:,-1])
 
-            model = sef.train_model(X_train, y_train)
+            model = self.train_model(X_train, y_train)
             y_train_pred = model.predict(X_train)
             classifiaction_train_metrics = get_classification_score(y_true=y_train, y_pred=y_train_pred)
 
