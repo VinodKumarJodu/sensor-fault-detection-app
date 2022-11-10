@@ -3,14 +3,22 @@ from sensor.logger import logging
 from sensor.exceptions import SensorException
 from sensor.entity.config_entity import ModelEvaluationConfig
 from sensor.entity.artifact_entity import DataValidationArtifact, ModelTrainerArtifact, ModelEvaluationArtifact
-from sensor.ml.metrics.classifaction_metrics import get_classification_score
+from sensor.ml.metrics.classification_metrics import get_classification_score
 from sensor.ml.model.estimator import SensorModel, ModelResolver, TargetValueMapping
 from sensor.utils.main_utils import save_object, load_object, write_yaml_file
 from sensor.constants.training_pipeline_constants import TARGET_COLUMN
 import pandas as pd 
 
-def ModelEvaluation:
+class ModelEvaluation:
     def __init__(self,model_evaluation_config:ModelEvaluationConfig, data_validation_artifact:DataValidationArtifact, model_trainer_artifact:ModelTrainerArtifact):
+        try:
+            self.model_evaluation_config = model_evaluation_config
+            self.data_validation_artifact = data_validation_artifact
+            self.model_trainer_artifact = model_trainer_artifact
+        except Exception as e:
+            raise SensorException(e, sys)
+
+    def initiate_model_evaluation(self)->ModelEvaluationArtifact:
         try:
             valid_train_file_path = self.data_validation_artifact.valid_train_file_path 
             valid_test_file_path = self.data_validation_artifact.valid_test_file_path
@@ -60,17 +68,12 @@ def ModelEvaluation:
                 trained_model_path = trained_model_file_path,
                 trained_model_metric_artifact = trained_metrics,
                 best_model_metric_artifact = latest_metrics)
-             model_evaluation_report = model_evaluation_artifact.__dict__
+            model_evaluation_report = model_evaluation_artifact.__dict__
 
-             # save the report
-             write_yaml_file(self.model_evaluation_config.report_file_path, model_evaluation_report)
-             logging.info(f"Model Evaluation Artifact: {model_evaluation_artifact}")
-             return model_evaluation_artifact   
-
-            
-
-
-
+            # save the report
+            write_yaml_file(self.model_evaluation_config.report_file_path, model_evaluation_report)
+            logging.info(f"Model Evaluation Artifact: {model_evaluation_artifact}")
+            return model_evaluation_artifact   
         except Exception as e:
             raise SensorException(e, sys)
 

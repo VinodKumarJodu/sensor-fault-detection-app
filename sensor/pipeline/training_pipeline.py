@@ -55,7 +55,7 @@ class TrainPipeline:
             raise SensorException(e, sys)
     def start_model_evaluation(self,data_validation_artifact:DataValidationArtifact, model_trainer_artifact: ModelTrainerArtifact):
         try:
-            model_evaluation_config = ModelEvaluationConfig(self.training_pipeline_config)
+            model_evaluation_config = ModelEvaluationConfig(training_pipeline_config = self.training_pipeline_config)
             model_evaluation = ModelEvaluation(model_evaluation_config, data_validation_artifact, model_trainer_artifact)
             model_evaluation_artifact = model_evaluation.initiate_model_evaluation()
 

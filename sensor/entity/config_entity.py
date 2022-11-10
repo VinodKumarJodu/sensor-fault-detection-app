@@ -13,6 +13,7 @@ from sensor.constants.training_pipeline_constants import DATA_TRANSFORMATION_DIR
 from sensor.constants.training_pipeline_constants import MODEL_TRAINER_DIR_NAME, MODEL_TRAINER_TRAINED_MODEL_DIR,MODEL_TRAINER_TRAINED_MODEL_NAME, MODEL_TRAINER_EXPECTED_SCORE, MODEL_TRAINER_OVER_FITTING_UNDER_FITTING_THRESHOLD
 # Importing Model Evaluation Related COnstants
 from sensor.constants.training_pipeline_constants import MODEL_EVALUATION_DIR_NAME, MODEL_EVALUATION_THRESHOLD_SCORE, MODEL_EVALUATION_REPORT_NAME
+
 class TrainingPipelineConfig:
     def __init__(self, timestamp=datetime.now()):
         timestamp = timestamp.strftime("%m_%d_%Y_%H_%M_%S")
@@ -20,7 +21,6 @@ class TrainingPipelineConfig:
         self.pipeline_name: str = PIPELINE_NAME
         self.artifact_dir: str = os.path.join(ARTIFACT_DIR, timestamp)
 
-# training_pipeline_config: TrainingPipelineConfig = TrainingPipelineConfig()
 
 class DataIngestionConfig:
     def __init__(self, training_pipeline_config = TrainingPipelineConfig()):
@@ -53,10 +53,11 @@ class ModelTrainerConfig:
     def __init__(self,training_pipeline_config:TrainingPipelineConfig):
         self.model_trainer_dir: str = os.path.join(training_pipeline_config.artifact_dir, MODEL_TRAINER_DIR_NAME)
         self.trained_model_file_path: str = os.path.join(self.model_trainer_dir, MODEL_TRAINER_TRAINED_MODEL_DIR,MODEL_FILE_NAME)
-        self.expected_accuracy: float
+        self.expected_accuracy: float = MODEL_TRAINER_EXPECTED_SCORE
+        self.overfitting_underfitting_threshold = MODEL_TRAINER_OVER_FITTING_UNDER_FITTING_THRESHOLD
 class ModelEvaluationConfig:
     def __init__(self, training_pipeline_config:TrainingPipelineConfig):
-        self.model_evaluation_dir: str = os.path.join(self.training_pipeline_config.artifact_dir, MODEL_EVALUATION_DIR_NAME)
+        self.model_evaluation_dir: str = os.path.join(training_pipeline_config.artifact_dir, MODEL_EVALUATION_DIR_NAME)
         self.change_threshold: float = MODEL_EVALUATION_THRESHOLD_SCORE
-        self.report_file_path: str = os.path.join(model_evaluation_dir, MODEL_EVALUATION_REPORT_NAME)
+        self.report_file_path: str = os.path.join(self.model_evaluation_dir, MODEL_EVALUATION_REPORT_NAME)
         
