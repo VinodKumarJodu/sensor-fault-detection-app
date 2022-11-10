@@ -42,7 +42,7 @@ class ModelResolver:
             timestamps = list(map(int, os.listdir(self.model_dir)))
             latest_timestamp = max(timestamps)
             latest_model_path = os.path.join(self.model_dir, f"{latest_timestamp}",MODEL_FILE_NAME) 
-            retrun latest_model_path
+            return latest_model_path
         except Exception as e:
             raise SensorException(e, sys)
 
