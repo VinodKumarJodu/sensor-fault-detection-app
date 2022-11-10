@@ -34,7 +34,7 @@ class ModelTrainerArtifact:
 
 @dataclass
 class ModelEvaluationArtifact:
-    is_model_accespted: bool
+    is_model_accepted: bool
     improved_accuracy: float
     best_model_path: str
     trained_model_path: str
