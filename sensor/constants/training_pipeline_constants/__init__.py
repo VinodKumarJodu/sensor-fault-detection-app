@@ -49,4 +49,10 @@ MODEL_TRAINER_TRAINED_MODEL_NAME: str = "model.pkl"
 MODEL_TRAINER_EXPECTED_SCORE: float = 0.6
 MODEL_TRAINER_OVER_FITTING_UNDER_FITTING_THRESHOLD: float = 0.05
 
+"""
+Model Evaluation related Constants will start with MODEL_EVALUATION variable name
+"""
+MODEL_EVALUATION_DIR_NAME: str = "model_evaluation"
+MODEL_EVALUATION_THRESHOLD_SCORE: float = 0.02
+MODEL_EVALUATION_REPORT_NAME: str = "model_evaluation_report.yaml"
 
