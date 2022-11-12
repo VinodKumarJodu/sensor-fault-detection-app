@@ -1,5 +1,6 @@
 from datetime import datetime
 import os
+from sensor.logger import logging
 from dataclasses import dataclass
 # Importing training pipeline related constants
 from sensor.constants.training_pipeline_constants import PIPELINE_NAME, ARTIFACT_DIR, FILE_NAME, TRAIN_FILE_NAME, TEST_FILE_NAME, MODEL_FILE_NAME
@@ -57,7 +58,8 @@ class ModelTrainerConfig:
         self.overfitting_underfitting_threshold = MODEL_TRAINER_OVER_FITTING_UNDER_FITTING_THRESHOLD
 class ModelEvaluationConfig:
     def __init__(self, training_pipeline_config:TrainingPipelineConfig):
+        logging.info("Entered Model Evaluation Config")
         self.model_evaluation_dir: str = os.path.join(training_pipeline_config.artifact_dir, MODEL_EVALUATION_DIR_NAME)
         self.change_threshold: float = MODEL_EVALUATION_THRESHOLD_SCORE
         self.report_file_path: str = os.path.join(self.model_evaluation_dir, MODEL_EVALUATION_REPORT_NAME)
-        
+        logging.info("Exited from Model Evaluation Config")

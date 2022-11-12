@@ -20,6 +20,7 @@ class ModelEvaluation:
 
     def initiate_model_evaluation(self)->ModelEvaluationArtifact:
         try:
+            logging.info("Entered Model Evaluation Component")
             valid_train_file_path = self.data_validation_artifact.valid_train_file_path 
             valid_test_file_path = self.data_validation_artifact.valid_test_file_path
 
@@ -28,14 +29,14 @@ class ModelEvaluation:
             test_df = pd.read_csv(valid_test_file_path)
 
             df = pd.concat([train_df, test_df])
-            y_true = test_df[TARGET_COLUMN].replace(TargetValueMapping.to_dict(), inplace=True)
+            y_true = test_df[TARGET_COLUMN].replace(TargetValueMapping().to_dict(), inplace=True)
             df.drop(TARGET_COLUMN, axis=1, inplace=True)
 
             trained_model_file_path = self.model_trainer_artifact.trained_model_file_path
             model_resolver = ModelResolver()
 
             is_model_accepted = True
-
+            logging.info(f"The Value of is_model_accepted: {is_model_accepted}")
             if not model_resolver.is_model_exists():
                 model_evaluation_artifact = ModelEvaluationArtifact(is_model_accepted= is_model_accepted,
                                                                     improved_accuracy= None,
@@ -44,6 +45,7 @@ class ModelEvaluation:
                                                                     trained_model_metric_artifact=self.model_trainer_artifact.test_metric_artifact,
                                                                     best_model_metric_artifact=None)
                 logging.info(f"Model Evaluation Artifact: {model_evaluation_artifact}")
+                write_yaml_file(self.model_evaluation_config.report_file_path, model_evaluation_artifact.__dict__)
                 return model_evaluation_artifact
             latest_model_path = model_resolver.get_best_model_path()
             latest_model = load_object(file_path=latest_model_path)
@@ -74,11 +76,5 @@ class ModelEvaluation:
             write_yaml_file(self.model_evaluation_config.report_file_path, model_evaluation_report)
             logging.info(f"Model Evaluation Artifact: {model_evaluation_artifact}")
             return model_evaluation_artifact   
-        except Exception as e:
-            raise SensorException(e, sys)
-
-    def initiate_model_evaluation(self)-> ModelEvaluationArtifact:
-        try:
-            pass 
         except Exception as e:
             raise SensorException(e, sys)
