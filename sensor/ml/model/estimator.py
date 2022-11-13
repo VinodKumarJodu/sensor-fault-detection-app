@@ -1,4 +1,6 @@
-import os
+import os, sys
+from sensor.logger import logging
+from sensor.exceptions import SensorException
 from sensor.constants.training_pipeline_constants import SAVED_MODEL_DIR, MODEL_FILE_NAME
 
 class TargetValueMapping:
@@ -50,12 +52,12 @@ class ModelResolver:
         try:
             if not os.path.exists(self.model_dir):
                 return False
-            timestamps = self.get_best_model_path()
-            
+
+            timestamps = os.listdir(self.model_dir)
             if len(timestamps) == 0:
                 return False
-            latest_model_path = self.get_best_model_path()
 
+            latest_model_path = self.get_best_model_path()
             if not os.path.exists(latest_model_path):
                 return False
             return True 

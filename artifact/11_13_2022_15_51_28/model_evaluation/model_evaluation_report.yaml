@@ -1,0 +1,31 @@
+best_model_metric_artifact: null
+best_model_path: null
+improved_accuracy: null
+is_model_accepted: true
+trained_model_metric_artifact: !!python/object:sensor.entity.artifact_entity.ClassificationMetricArtifact
+  f1_score: !!python/object/apply:numpy.core.multiarray.scalar
+  - &id001 !!python/object/apply:numpy.dtype
+    args:
+    - f8
+    - false
+    - true
+    state: !!python/tuple
+    - 3
+    - <
+    - null
+    - null
+    - null
+    - -1
+    - -1
+    - 0
+  - !!binary |
+    sE8vC+bL7z8=
+  precision_score: !!python/object/apply:numpy.core.multiarray.scalar
+  - *id001
+  - !!binary |
+    iibuZj7m7z8=
+  recall_score: !!python/object/apply:numpy.core.multiarray.scalar
+  - *id001
+  - !!binary |
+    Jz22D7mx7z8=
+trained_model_path: artifact/11_13_2022_15_51_28/model_trainer/trained_models/model.pkl
