@@ -56,3 +56,8 @@ MODEL_EVALUATION_DIR_NAME: str = "model_evaluation"
 MODEL_EVALUATION_THRESHOLD_SCORE: float = 0.02
 MODEL_EVALUATION_REPORT_NAME: str = "model_evaluation_report.yaml"
 
+"""
+Model Pusher Related Constants will start with MODEL_PUSHER variable name
+"""
+MODEL_PUSHER_DIR_NAME: str = "model_pusher"
+MODEL_PUSHER_SAVED_MODEL_DIR = SAVED_MODEL_DIR
