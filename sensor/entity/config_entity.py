@@ -14,7 +14,8 @@ from sensor.constants.training_pipeline_constants import DATA_TRANSFORMATION_DIR
 from sensor.constants.training_pipeline_constants import MODEL_TRAINER_DIR_NAME, MODEL_TRAINER_TRAINED_MODEL_DIR,MODEL_TRAINER_TRAINED_MODEL_NAME, MODEL_TRAINER_EXPECTED_SCORE, MODEL_TRAINER_OVER_FITTING_UNDER_FITTING_THRESHOLD
 # Importing Model Evaluation Related COnstants
 from sensor.constants.training_pipeline_constants import MODEL_EVALUATION_DIR_NAME, MODEL_EVALUATION_THRESHOLD_SCORE, MODEL_EVALUATION_REPORT_NAME
-
+#Importing Model Pusher Related Constants
+from sensor.constants.training_pipeline_constants inport MODEL_PUSHER_DIR_NAME, MODEL_PUSHER_SAVED_MODEL_DIR
 class TrainingPipelineConfig:
     def __init__(self, timestamp=datetime.now()):
         timestamp = timestamp.strftime("%m_%d_%Y_%H_%M_%S")
@@ -56,6 +57,7 @@ class ModelTrainerConfig:
         self.trained_model_file_path: str = os.path.join(self.model_trainer_dir, MODEL_TRAINER_TRAINED_MODEL_DIR,MODEL_FILE_NAME)
         self.expected_accuracy: float = MODEL_TRAINER_EXPECTED_SCORE
         self.overfitting_underfitting_threshold = MODEL_TRAINER_OVER_FITTING_UNDER_FITTING_THRESHOLD
+
 class ModelEvaluationConfig:
     def __init__(self, training_pipeline_config:TrainingPipelineConfig):
         logging.info("Entered Model Evaluation Config")
@@ -63,3 +65,11 @@ class ModelEvaluationConfig:
         self.change_threshold: float = MODEL_EVALUATION_THRESHOLD_SCORE
         self.report_file_path: str = os.path.join(self.model_evaluation_dir, MODEL_EVALUATION_REPORT_NAME)
         logging.info("Exited from Model Evaluation Config")
+
+class ModelPusherConfig:
+    def __init__(self, training_pipeline_config:TrainingPipelineConfig):
+        logging.info("Entered Model Pusher Config")
+        self.model_pusher_config = os.path.join(training_pipeline_config.artifact_dir, MODEL_PUSHER_DIR_NAME)
+        self.model_file_path = os.path.join(self.model_pusher_config, MODEL_FILE_NAME)
+        timestamp = round(datetime.now().timestamp())
+        self.saved_model_path = os.path.join(SAVED_MODEL_DIR,f"{timestamp}", MODEL_FILE_NAME)
