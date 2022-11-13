@@ -15,7 +15,7 @@ from sensor.constants.training_pipeline_constants import MODEL_TRAINER_DIR_NAME,
 # Importing Model Evaluation Related COnstants
 from sensor.constants.training_pipeline_constants import MODEL_EVALUATION_DIR_NAME, MODEL_EVALUATION_THRESHOLD_SCORE, MODEL_EVALUATION_REPORT_NAME
 #Importing Model Pusher Related Constants
-from sensor.constants.training_pipeline_constants import MODEL_PUSHER_DIR_NAME, MODEL_PUSHER_SAVED_MODEL_DIR
+from sensor.constants.training_pipeline_constants import MODEL_PUSHER_DIR_NAME, MODEL_PUSHER_SAVED_MODEL_DIR, SAVED_MODEL_DIR
 class TrainingPipelineConfig:
     def __init__(self, timestamp=datetime.now()):
         timestamp = timestamp.strftime("%m_%d_%Y_%H_%M_%S")
@@ -72,4 +72,4 @@ class ModelPusherConfig:
         self.model_pusher_config = os.path.join(training_pipeline_config.artifact_dir, MODEL_PUSHER_DIR_NAME)
         self.model_file_path = os.path.join(self.model_pusher_config, MODEL_FILE_NAME)
         timestamp = round(datetime.now().timestamp())
-        self.saved_model_path = os.path.join(SAVED_MODEL_DIR,f"{timestamp}", MODEL_FILE_NAME)
+        self.saved_model_path = os.path.join(self.model_pusher_config,SAVED_MODEL_DIR,f"{timestamp}", MODEL_FILE_NAME)

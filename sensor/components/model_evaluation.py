@@ -29,7 +29,8 @@ class ModelEvaluation:
             test_df = pd.read_csv(valid_test_file_path)
 
             df = pd.concat([train_df, test_df])
-            y_true = test_df[TARGET_COLUMN].replace(TargetValueMapping().to_dict(), inplace=True)
+            y_true = df[TARGET_COLUMN]
+            y_true.replace(TargetValueMapping().to_dict(), inplace=True)
             df.drop(TARGET_COLUMN, axis=1, inplace=True)
 
             trained_model_file_path = self.model_trainer_artifact.trained_model_file_path
@@ -53,8 +54,8 @@ class ModelEvaluation:
 
             y_trained_pred = train_model.predict(df)
             y_latest_pred = latest_model.predict(df)
-
-            trained_metrics = get_classification_score(y_true, y_trained_true)
+            logging.info(f"y_true: [{y_true}], y_trained_pred: [{y_trained_pred}]")
+            trained_metrics = get_classification_score(y_true, y_trained_pred)
             latest_metrics = get_classification_score(y_true,y_latest_pred)
 
             improved_accuracy = trained_metrics.f1_score - latest_metrics.f1_score
