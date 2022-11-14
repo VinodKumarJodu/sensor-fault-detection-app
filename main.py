@@ -37,9 +37,9 @@ async def train_route():
         if training_pipeline.is_pipeline_running:
             return Response("Training Pipeline is already running...!")
         training_pipeline.run_pipeline()
-        return Response("Training Successful !") 
+        return Response("Training Successful!") 
     except Exception as e:
-        retrun Response(f"Error Occured! {e}")
+        return Response(f"Error Occured! {e}")
 
 @app.get("/predict")
 async def predict_route():
