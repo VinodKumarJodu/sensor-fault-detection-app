@@ -8,7 +8,7 @@ from sensor.constants.training_pipeline_constants import SAVED_MODEL_DIR
 from sensor.constants.application import APP_HOST, APP_PORT
 from sensor.ml.model.estimator import ModelResolver, TargetValueMapping
 
-from fastapi import FastAPI 
+from fastapi import FastAPI, File, UploadFile, Request
 from fastapi.responses import Response 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -42,9 +42,9 @@ async def train_route():
         return Response(f"Error Occured! {e}")
 
 @app.get("/predict")
-async def predict_route():
+async def predict_route(request: Request, file:UploadFile=File(...)):
     try:
-        df = None
+        df = pd.read_csv(file.file)
         model_resolver = ModelResolver(model_dir=SAVED_MODEL_DIR)
         if not model_resolver.is_model_exists():
             return Response("Model is not available")
@@ -54,6 +54,7 @@ async def predict_route():
         y_pred = model.predict(df)
         df["predicted_column"] = y_pred 
         df["predicted_column"].replace(TargetValueMapping().reverse_mapping(), inplace=True)
+        return df.to_html()
     except Exception as e:
         raise Response(f"Error Occured..! {e}")
     
