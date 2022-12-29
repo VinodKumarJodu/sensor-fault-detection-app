@@ -1,6 +1,7 @@
 import os
 from sensor.constants.s3_bucket import TRAINING_BUCKET_NAME
 
+
 # Defining Common Constants
 TARGET_COLUMN ="class"
 PIPELINE_NAME = "sensor"
